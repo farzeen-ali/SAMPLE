@@ -26,13 +26,14 @@ const server = app.listen(5000, () => {
   });
 });
 
-
 const serverHealthCheck = () => {
   http.get('http://localhost:5000/', (res) => {
     if (res.statusCode !== 200) {
       console.error('Health check failed');
       server.close();
       process.exit(1);
+    } else {
+      console.log('Health check passed');
     }
   }).on('error', (err) => {
     console.error('Health check request failed:', err.message);
