@@ -1,1 +1,1 @@
-console.log(Hello from indexjs)
+console.log('Hello from indexjs')
