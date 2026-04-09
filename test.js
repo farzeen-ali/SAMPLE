@@ -25,3 +25,20 @@ const server = app.listen(5000, () => {
     process.exit(1);
   });
 });
+
+
+const serverHealthCheck = () => {
+  http.get('http://localhost:5000/', (res) => {
+    if (res.statusCode !== 200) {
+      console.error('Health check failed');
+      server.close();
+      process.exit(1);
+    }
+  }).on('error', (err) => {
+    console.error('Health check request failed:', err.message);
+    server.close();
+    process.exit(1);
+  });
+};
+
+setTimeout(serverHealthCheck, 1000);
